@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-const ProductsPage = () => {
+import { 
+  getProductsRequest,
+} from '../../actions/products'
+
+const ProductsPage = (props) => {
   useEffect(() => {
-    this.props.getProductsRequest()
+    props.getProductsRequest()
   })
 
-  const goToProduct = id => this.props.history.push(`/products/${id}`)
+  const goToProduct = id => props.history.push(`/products/${id}`)
 
-  const products = this.props.products.map(prod => (
+  const products = props.products.map(prod => (
     <Card>
-      <CardActionArea onClick={goToProduct}>
+      <CardActionArea onClick={() => goToProduct(prod.id)}>
         <CardMedia
           image={prod.image}
           title={prod.title}
