@@ -1,23 +1,25 @@
 import React from 'react';
+import styled from 'styled-components';
+import Link from '@material-ui/core/Link';
 
-import VendorButton from '../Forms/VendorButton';
-import { ReactComponent as Logo } from '../../assets/images/logo.svg';
+const HeaderDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 18px 40px;
+  align-items: center;
+`;
 
-import './LandingHeader.scss';
-
-export default function LandingHeader(props) {
+export default function Header(props) {
   return (
-    <div className='landing-header'>
-      <Logo className='company-logo'/>
-      <div className='company-name'>Vendorstan</div>
-      <div className='buttons'>
-        <VendorButton color='secondary'>
-          Log in
-        </VendorButton>
-        <VendorButton variant='contained'>
-          Register for free
-        </VendorButton>
+    <HeaderDiv>
+      <div className='links'>
+        <Link href="/products" onClick={preventDefault}>
+          Products
+        </Link>
+        <Link href="/cart" onClick={preventDefault}>
+          Cart
+        </Link>
       </div>
-    </div>
-  )
+    </HeaderDiv>
+  );
 }

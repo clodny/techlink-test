@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Switch, Route } from 'react-router-dom';
-import HomePage from 'containers/HomePage/Loadable';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Header from 'components/Header';
+import ProductsPage from 'containers/ProductsPage';
+import ProductItemPage from 'containers/ProductItemPage';
+import CartPage from 'containers/CartPage';
 import GlobalStyle from '../../global-styles';
 
 const AppWrapper = styled.div`
@@ -17,8 +20,12 @@ const AppWrapper = styled.div`
 export default function App() {
   return (
     <AppWrapper>
+      <Header/>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" render={<Redirect to='/products' />} />
+        <Route exact path="/products" component={ProductsPage} />
+        <Route exact path="/products/:id" component={ProductItemPage} />
+        <Route exact path="/cart" component={CartPage} />
       </Switch>
     </AppWrapper>
   );
