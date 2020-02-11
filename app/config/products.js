@@ -9,7 +9,8 @@ export const products = [
     warranty: '14 days',
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 42
+    quantity: 42,
+    price: '300',
   }, {
     id: '2',
     title: 'Background fabric Falcon White 2.4х2.7 m',
@@ -20,7 +21,8 @@ export const products = [
     warranty: '12 months',
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 11
+    quantity: 11,
+    price: '5345'
   }, {
     id: '3',
     title: 'Background fabric Falcon green 2.7x5.0 m (Chromakey)',
@@ -31,7 +33,8 @@ export const products = [
     warranty: '14 days',
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 31
+    quantity: 31,
+    price: '2324'
   }, {
     id: '4',
     title: 'Background fabric Falcon on a spring of 158х193 cm (Chromakey Green-Gray)',
@@ -42,7 +45,8 @@ export const products = [
     warranty: '12 months',
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 2
+    quantity: 2,
+    price: '1214'
   }, {
     id: '5',
     title: 'Background fabric green for Chromakey photo studio 1.5x2.2 m',
@@ -53,7 +57,8 @@ export const products = [
     warranty: null,
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 0
+    quantity: 0,
+    price: '5764'
   }, {
     id: '6',
     title: 'Background for subject shooting Puluz PKT5200 120x60cm black',
@@ -64,7 +69,8 @@ export const products = [
     warranty: null,
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 66
+    quantity: 66,
+    price: '9923'
   }, {
     id: '7',
     title: 'Background fabric MyGear green chromakey WOB-2002 - 3x3 m',
@@ -75,6 +81,7 @@ export const products = [
     warranty: null,
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 66
+    quantity: 66,
+    price: '3535'
   }
 ]

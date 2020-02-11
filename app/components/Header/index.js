@@ -13,10 +13,10 @@ export default function Header(props) {
   return (
     <HeaderDiv>
       <div className='links'>
-        <Link href="/products" onClick={(e) => e.preventDefault()}>
+        <Link href="/products">
           Products
         </Link>
-        <Link href="/cart" onClick={(e) => e.preventDefault()}>
+        <Link href="/cart">
           Cart
         </Link>
       </div>

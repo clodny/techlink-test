@@ -11,6 +11,11 @@ import {
   getProductsRequest,
 } from '../../actions/products'
 
+const ProdItem = styled(Card)`
+  margin-bottom: 12px;
+  width: 30%;
+`
+
 const ProductsPage = (props) => {
   useEffect(() => {
     props.getProductsRequest()
@@ -19,10 +24,10 @@ const ProductsPage = (props) => {
   const goToProduct = id => props.history.push(`/products/${id}`)
 
   const products = props.products.map(prod => (
-    <Card>
+    <ProdItem key={`product-${prod.id}`}>
       <CardActionArea onClick={() => goToProduct(prod.id)}>
         <CardMedia
-          image={prod.image}
+          image='https://picsum.photos/700/500'
           title={prod.title}
         />
         <CardContent>
@@ -34,7 +39,7 @@ const ProductsPage = (props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-    </Card>
+    </ProdItem>
   ))
 
   return (
