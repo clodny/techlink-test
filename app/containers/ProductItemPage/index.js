@@ -6,7 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
 import { 
-  getProductsRequest,
+  getProductByIdRequest,
+  addToCartRequest
 } from '../../actions/products'
 
 const ItemTitle = styled.div`
@@ -25,9 +26,13 @@ const ProdImg = styled.img`
 const ProductItemPage = (props) => {
   const productId = props.match.params.id
   const productItem = find(props.products, { id: productId })
+  const addToCart = () => {
+    props.addToCartRequest(productId)
+  }
+  const isInCart = props.cart.indexOf(productId) > -1
 
   useEffect(() => {
-    if(!props.products.length) props.getProductsRequest()
+    if(!props.products.length) props.getProductByIdRequest(productId)
   })
 
   if(!productItem) return null
@@ -44,7 +49,11 @@ const ProductItemPage = (props) => {
       <Grid item xs={12} sm={6}>
         <div className='item-buy'>
           <span>{productItem.price}$</span>
-          <Button>Buy</Button>
+          { 
+            isInCart ? 
+              <Button onClick={addToCart}>Buy</Button> : 
+              <div className='in-the-cart'>Already in your cart</div>
+          }
         </div>
         <div className='item-info'>
           <Grid container spacing={3}>
@@ -75,11 +84,13 @@ const ProductItemPage = (props) => {
 
 
 const mapDispatchToProps = {
-  getProductsRequest,
+  getProductByIdRequest,
+  addToCartRequest
 }
 
 const mapStateToProps = state => ({
-  products: state.products.data
+  products: state.products.data,
+  cart: state.products.cart
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductItemPage)

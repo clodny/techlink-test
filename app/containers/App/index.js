@@ -25,7 +25,7 @@ export default function App() {
         <Route exact path="/" render={() => <Redirect to='/products' />} />
         <Route exact path="/products" component={ProductsPage} />
         <Route exact path="/products/:id" component={ProductItemPage} />
-        {/* <Route exact path="/cart" component={CartPage} /> */}
+        <Route exact path="/cart" component={CartPage} />
       </Switch>
     </AppWrapper>
   );
