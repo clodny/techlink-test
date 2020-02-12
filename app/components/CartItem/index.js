@@ -41,15 +41,29 @@ const PriceGrid = styled(Grid)`
   }
 `
 
+const MinusItem = styled(RemoveIcon)`
+  &[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+`
+
+const PlusItem = styled(AddIcon)`
+  &[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+`
+
 const CartItem = (props) => {
-  const { product, changeQuantity } = props
+  const { product, changeQuantity, onRemove } = props
   const onQuantityChange = (value) => {
-    changeQuantity(value)
+    changeQuantity(product.id, value)
   }
   return (
     <Card>
       <CardContent>
-        <RemoveButton onClick={() => onRemoveOne(product.id)}>X</RemoveButton>
+        <RemoveButton onClick={() => onRemove(product.id)}>X</RemoveButton>
         <ProdImg src='https://picsum.photos/700/500' />
         <Typography gutterBottom component="h3">
           {product.title}
@@ -59,9 +73,9 @@ const CartItem = (props) => {
             <span className='item-price'>Price: {product.price}$</span>
           </MyGrid>
           <MyGrid item xs={4}>
-            <RemoveIcon onClick={() => onQuantityChange(product.quantity-1)} />
+            <MinusItem disabled={product.quantity === 1} onClick={() => onQuantityChange(product.quantity-1)} />
             <TextField value={product.quantity} onChange={e => debounce(() => onQuantityChange(e.target.value), 300)} />
-            <AddIcon onClick={() => onQuantityChange(product.quantity+1)} />
+            <PlusItem disabled={product.quantity === product.maxQuantity} onClick={() => onQuantityChange(product.quantity+1)} />
           </MyGrid>
           <MyGrid item xs={4}>
             <span className='item-total'>Total: {product.price * product.quantity}$</span>

@@ -48,6 +48,7 @@ const ClearButton = styled(Button)`
 
 const ProceedButton = styled(Button)`
   &.MuiButton-root {
+    display: block;
     padding: 8px 24px;
     background-color: green;
     color: white;
@@ -67,25 +68,41 @@ const EmptyState = styled.div`
   color: gray;
 `
 
+const TotalPrice = styled.div`
+  > span {
+    color: #f84147;
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
 const CartPage = (props) => {
   const onRemoveOne = id => props.removeFromCartRequest([id])
   const onRemoveAll = () => props.removeFromCartRequest(props.cart.map(cartItem => cartItem.id))
+  let totalPrice = 0
 
-  const cartItems = props.products.filter(prod => some(props.cart, inCart => inCart.id === prod.id))
-  const cartItemEls = cartItems.map(cartItem => (
-    <MyListTile>
-      <CartItem product={cartItem} changeQuantity={props.changeQuantityRequest}/>
+  const cartItemEls = props.cart.map(cartItem => (
+    <MyListTile key={`cart-item-${cartItem.id}`}>
+      <CartItem
+        product={cartItem}
+        changeQuantity={props.changeQuantityRequest}
+        onRemove={onRemoveOne}
+      />
     </MyListTile>
   ))
-
+  if(props.cart.length) props.cart.map(cartItem => totalPrice = totalPrice + cartItem.price*cartItem.quantity)
   const buttonsBlock = (
     <React.Fragment>
+      <TotalPrice>
+        <span>Total price: {totalPrice}$</span>
+        <ProceedButton>Proceed</ProceedButton>
+      </TotalPrice>
       <div className='clear-all'>
         <ClearButton onClick={onRemoveAll}>Clear Cart</ClearButton>
-      </div>
-      <div className='total-price'>
-        {/* {totalPrice}$ */}
-        <ProceedButton>Proceed</ProceedButton>
       </div>
     </React.Fragment>
   )
@@ -96,7 +113,6 @@ const CartPage = (props) => {
     </EmptyState>
   )
 
-  // const totalPrice = cartItems.length && cartItems.reduce((total, item) => total + item.price*item.quantity)
 
   return (
     <CartPageEl>

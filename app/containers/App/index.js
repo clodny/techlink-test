@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from 'components/Header';
@@ -17,10 +18,10 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function App() {
+const App = (props) => {
   return (
     <AppWrapper>
-      <Header/>
+      <Header cartCount={props.cart.length} />
       <Switch>
         <Route exact path="/" render={() => <Redirect to='/products' />} />
         <Route exact path="/products" component={ProductsPage} />
@@ -30,3 +31,11 @@ export default function App() {
     </AppWrapper>
   );
 }
+
+const mapDispatchToProps = {}
+
+const mapStateToProps = state => ({
+  cart: state.products.cart
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

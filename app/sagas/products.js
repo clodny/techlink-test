@@ -10,7 +10,7 @@ import { getErrorMessage } from '../utils/errorHandling';
 export function* addToCartRequest(action) {
   const response = yield call(addToCartApi, action.id)
   if(!response.isAxiosError) {
-    yield put({ type: productsActions.ADD_TO_CART_REQUEST_SUCCESS, item: { id: action.id, quantity: 1 } })
+    yield put({ type: productsActions.ADD_TO_CART_REQUEST_SUCCESS, id: action.id })
   } else {
     yield put({ type: productsActions.ADD_TO_CART_REQUEST_FAIL, error: { message: getErrorMessage(response) } })
   }
@@ -19,9 +19,9 @@ export function* addToCartRequest(action) {
 export function* removeFromCartRequest(action) {
   const response = yield call(removeFromCartApi, action.ids)
   if(!response.isAxiosError) {
-    yield put({ type: productsActions.ADD_TO_CART_REQUEST_SUCCESS, ids: action.ids })
+    yield put({ type: productsActions.REMOVE_FROM_CART_REQUEST_SUCCESS, ids: action.ids })
   } else {
-    yield put({ type: productsActions.ADD_TO_CART_REQUEST_FAIL, error: { message: getErrorMessage(response) } })
+    yield put({ type: productsActions.REMOVE_FROM_CART_REQUEST_FAIL, error: { message: getErrorMessage(response) } })
   }
 }
 

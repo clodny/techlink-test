@@ -4,7 +4,7 @@ export const ADD_TO_CART_REQUEST = 'ADD_TO_CART_REQUEST'
 export const ADD_TO_CART_REQUEST_SUCCESS = 'ADD_TO_CART_REQUEST_SUCCESS'
 export const ADD_TO_CART_REQUEST_FAIL = 'ADD_TO_CART_REQUEST_FAIL'
 export const addToCartRequest = defaultActionCreator(ADD_TO_CART_REQUEST, 'id')
-export const addToCartRequestSuccess = defaultActionCreator(ADD_TO_CART_REQUEST_SUCCESS, 'item')
+export const addToCartRequestSuccess = defaultActionCreator(ADD_TO_CART_REQUEST_SUCCESS, 'id')
 export const addToCartRequestFail = defaultActionCreator(ADD_TO_CART_REQUEST_FAIL, 'error')
 
 export const REMOVE_FROM_CART_REQUEST = 'REMOVE_FROM_CART_REQUEST'

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Badge from '@material-ui/core/Badge';
 
 const HeaderDiv = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ const Links = styled.div`
   }
 `
 
-const Cart = styled(Link)`
+const Cart = styled(Badge)`
   margin-left: auto;
 `
 
@@ -35,7 +36,9 @@ export default function Header(props) {
       <Company>Great Company</Company>
       <Links>
         <Link to='/products'>Products</Link>
-        <Cart to="/cart">Cart</Cart>
+        <Cart badgeContent={props.cartCount} color="secondary">
+          <Link to="/cart">Cart</Link>
+        </Cart>
       </Links>
     </HeaderDiv>
   );

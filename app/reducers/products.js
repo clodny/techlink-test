@@ -1,5 +1,6 @@
 import some from 'lodash/some';
 import findIndex from 'lodash/findIndex';
+import find from 'lodash/find';
 import update from 'react-addons-update';
 import { 
   REMOVE_FROM_CART_REQUEST_FAIL,
@@ -27,24 +28,27 @@ export default function reducer(state = initialState, action) {
         error: action.error
       }
     case ADD_TO_CART_REQUEST_SUCCESS:
+      const itemToCart = Object.assign({}, find(state.data, { id: action.id }), { quantity: 1 })
       return {
         ...state,
-        cart: [...state.cart, action.item]
+        cart: [...state.cart, itemToCart]
       }
     case REMOVE_FROM_CART_REQUEST_SUCCESS:
+      const withoutRemoved = state.cart.filter(cartItem => !some(action.ids, idToRemove => idToRemove === cartItem.id))
       return {
         ...state,
-        cart: state.cart.filter(cartItem => !some(action.ids, idToRemove => idToRemove === cartItem.id))
+        cart: withoutRemoved
       }
     case CHANGE_QUANTITY_REQUEST_SUCCESS:
       const indexOfItem = findIndex(state.cart, { id: action.id })
-      return update(state, { 
-        cart: { 
-          [indexOfItem]: {
-            quantity: {$set: action.quantity}
-          }
-        }
-      })
+      const updatedItem = find(state.cart, { id: action.id })
+      const updatedCart = [...state.cart]
+      updatedItem.quantity = action.quantity
+      updatedCart[indexOfItem] = updatedItem
+      return {
+        ...state,
+        cart: updatedCart
+      }
     default:
       return state
   }
