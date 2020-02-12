@@ -40,7 +40,7 @@ const CartPage = (props) => {
 
   return (
     <div className='cart-page'>
-      { cartItems }
+      { cartItemEls }
       <div className='clear-all'>
         <Button onClick={onRemoveAll}>Clear Cart</Button>
       </div>
