@@ -71,14 +71,8 @@ const BuyButton = styled(Button)`
 const ProductItemPage = (props) => {
   const productId = props.match.params.id
   const productItem = find(props.products, { id: productId })
-  const addToCart = () => {
-    props.addToCartRequest(productId)
-  }
-  const isInCart = props.cart.indexOf(productId) > -1
-
-  useEffect(() => {
-    if(!props.products.length) props.getProductByIdRequest(productId)
-  })
+  const addToCart = () => props.addToCartRequest(productId)
+  const isInCart = find(props.cart, { id: productId })
 
   if(!productItem) return null
   return (

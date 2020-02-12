@@ -8,13 +8,10 @@ import 'sanitize.css/sanitize.css';
 
 import configureStore from './configureStore';
 import App from 'containers/App';
-import { products } from './config/products';
 
 const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
-
-localStorage.setItem('products', JSON.stringify(products))
 
 const render = () => {
   ReactDOM.render(

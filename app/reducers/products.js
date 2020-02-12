@@ -1,65 +1,50 @@
 import some from 'lodash/some';
+import findIndex from 'lodash/findIndex';
+import update from 'react-addons-update';
 import { 
-  GET_PRODUCTS_REQUEST,
-  GET_PRODUCTS_REQUEST_SUCCESS,
-  GET_PRODUCTS_REQUEST_FAIL,
-  GET_PRODUCT_BY_ID_REQUEST_FAIL,
   REMOVE_FROM_CART_REQUEST_FAIL,
   ADD_TO_CART_REQUEST_FAIL,
   CHANGE_QUANTITY_REQUEST_FAIL,
   ADD_TO_CART_REQUEST_SUCCESS,
-  GET_PRODUCT_BY_ID_REQUEST_SUCCESS,
   REMOVE_FROM_CART_REQUEST_SUCCESS,
+  CHANGE_QUANTITY_REQUEST_SUCCESS,
 } from '../actions/products';
-
+import { products } from '../config/products'
+ 
 let initialState = {
-  data: [],
+  data: products,
   cart: [],
   error: null,
-  isLoading: false,
 }
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case GET_PRODUCTS_REQUEST:
-      return {
-        ...state,
-        isLoading: true
-      }
     case CHANGE_QUANTITY_REQUEST_FAIL:
     case REMOVE_FROM_CART_REQUEST_FAIL:
     case ADD_TO_CART_REQUEST_FAIL:
-    case GET_PRODUCT_BY_ID_REQUEST_FAIL:
-    case GET_PRODUCTS_REQUEST_FAIL:
       return {
         ...state,
-        isLoading: false,
         error: action.error
-      }
-    case GET_PRODUCTS_REQUEST_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        data: action.data
-      }
-    case GET_PRODUCT_BY_ID_REQUEST_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        data: action.data
       }
     case ADD_TO_CART_REQUEST_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        cart: [...state.cart, action.id]
+        cart: [...state.cart, action.item]
       }
     case REMOVE_FROM_CART_REQUEST_SUCCESS:
       return {
         ...state,
-        isLoading: false,
         cart: state.cart.filter(cartItem => !some(action.ids, idToRemove => idToRemove === cartItem.id))
       }
+    case CHANGE_QUANTITY_REQUEST_SUCCESS:
+      const indexOfItem = findIndex(state.cart, { id: action.id })
+      return update(state, { 
+        cart: { 
+          [indexOfItem]: {
+            quantity: {$set: action.quantity}
+          }
+        }
+      })
     default:
       return state
   }

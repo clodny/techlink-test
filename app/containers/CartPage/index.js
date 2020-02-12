@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import some from 'lodash/some';
+import Grid from '@material-ui/core/Grid';
 import { 
   changeQuantityRequest,
   removeFromCartRequest
 } from '../../actions/products'
 import { Button } from '@material-ui/core';
+
+const CartItems = styled.div`
+  width: 66%;
+  
+`
 
 const CartPage = (props) => {
   const onRemoveOne = id => props.removeFromCartRequest([id])
@@ -36,16 +42,19 @@ const CartPage = (props) => {
     </div>
   ))
 
-  const totalPrice = cartItems.length && cartItems.reduce((total, item) => total + item.price*item.quantity)
+  // const totalPrice = cartItems.length && cartItems.reduce((total, item) => total + item.price*item.quantity)
 
   return (
     <div className='cart-page'>
-      { cartItemEls }
+      <CartItems>
+        { cartItemEls }
+      </CartItems>
+      
       <div className='clear-all'>
         <Button onClick={onRemoveAll}>Clear Cart</Button>
       </div>
       <div className='total-price'>
-        {totalPrice}$
+        {/* {totalPrice}$ */}
         <Button>Proceed</Button>
       </div>
     </div>

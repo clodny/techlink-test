@@ -41,10 +41,6 @@ const PageTitle = styled.div`
 `
 
 const ProductsPage = (props) => {
-  useEffect(() => {
-    props.getProductsRequest()
-  })
-
   const goToProduct = id => props.history.push(`/products/${id}`)
 
   const products = props.products.map(product => (
