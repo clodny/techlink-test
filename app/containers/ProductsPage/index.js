@@ -12,6 +12,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import { 
   getProductsRequest,
 } from '../../actions/products'
+import ProductItem from '../../components/ProductItem';
 
 const MyGridList = styled(GridList)`
   width: 66%;
@@ -39,10 +40,6 @@ const PageTitle = styled.div`
   margin-top: 48px;
 `
 
-const ProdImg = styled.img`
-  width: 100%;
-`
-
 const ProductsPage = (props) => {
   useEffect(() => {
     props.getProductsRequest()
@@ -50,21 +47,9 @@ const ProductsPage = (props) => {
 
   const goToProduct = id => props.history.push(`/products/${id}`)
 
-  const products = props.products.map(prod => (
-    <MyListTile key={`product-${prod.id}`}>
-      <Card>
-        <CardActionArea onClick={() => goToProduct(prod.id)}>
-          <CardContent>
-            <ProdImg src='https://picsum.photos/700/500' />
-            <Typography gutterBottom component="h3">
-              {prod.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {prod.price}$
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+  const products = props.products.map(product => (
+    <MyListTile key={`product-${product.id}`}>
+      <ProductItem product={product} onClick={() => goToProduct(product.id)} />
     </MyListTile>
   ))
 

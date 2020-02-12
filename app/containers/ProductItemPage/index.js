@@ -14,13 +14,58 @@ const ItemTitle = styled.div`
   font-size: 24px;
   line-height: 24px;
   text-align: center;
+  margin-top: 48px;
+  margin-bottom: 48px;
 `
 const InfoLine = styled.div`
   font-weight: 500;
+  margin-bottom: 12px;
+`
+
+const InfoLineValue = styled.div`
+  margin-bottom: 12px;
 `
 
 const ProdImg = styled.img`
-  width: 100%;
+  width: 350px;
+`
+
+const ItemImage = styled.div`
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const ItemBuy = styled.div`
+  margin-bottom: 24px;
+  color: #f84147;
+  font-size: 24px;
+
+  > span {
+    margin-right: 48px;
+  }
+`
+
+const InTheCart = styled.div`
+  color: gray;
+  display: inline-block;
+`
+
+const BuyButton = styled(Button)`
+
+  &.MuiButton-root {
+    padding: 8px 24px;
+    background-color: green;
+    color: white;
+    text-align: center;
+  
+    &:hover {
+      background-color: green;
+      opacity: 0.6;
+    }
+  }
+  
 `
 
 const ProductItemPage = (props) => {
@@ -42,19 +87,19 @@ const ProductItemPage = (props) => {
         <ItemTitle>{productItem.title}</ItemTitle>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <div className='item-image'>
+        <ItemImage>
           <ProdImg src='https://picsum.photos/700/500' />
-        </div>
+        </ItemImage>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <div className='item-buy'>
+        <ItemBuy>
           <span>{productItem.price}$</span>
           { 
             isInCart ? 
-              <Button onClick={addToCart}>Buy</Button> : 
-              <div className='in-the-cart'>Already in your cart</div>
+              <InTheCart>Already in your cart</InTheCart> : 
+              <BuyButton onClick={addToCart}>Buy</BuyButton>
           }
-        </div>
+        </ItemBuy>
         <div className='item-info'>
           <Grid container spacing={3}>
             <Grid item xs={6}>
@@ -67,13 +112,13 @@ const ProductItemPage = (props) => {
               <InfoLine>Brand country:</InfoLine> 
             </Grid>
             <Grid item xs={6}>
-              <div>{productItem.type}</div> 
-              <div>{productItem.material}</div> 
-              <div>{productItem.dimension}</div> 
-              <div>{productItem.color}</div> 
-              <div>{productItem.warranty}</div> 
-              <div>{productItem.countryOfOrigin}</div> 
-              <div>{productItem.brandCountry}</div> 
+              <InfoLineValue>{productItem.type}</InfoLineValue> 
+              <InfoLineValue>{productItem.material}</InfoLineValue> 
+              <InfoLineValue>{productItem.dimension}</InfoLineValue> 
+              <InfoLineValue>{productItem.color}</InfoLineValue> 
+              <InfoLineValue>{productItem.warranty}</InfoLineValue> 
+              <InfoLineValue>{productItem.countryOfOrigin}</InfoLineValue> 
+              <InfoLineValue>{productItem.brandCountry}</InfoLineValue> 
             </Grid>
           </Grid>
         </div>
