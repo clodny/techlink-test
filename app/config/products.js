@@ -9,7 +9,7 @@ export const products = [
     warranty: '14 days',
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 42,
+    maxQuantity: 42,
     price: '300',
   }, {
     id: '2',
@@ -21,7 +21,7 @@ export const products = [
     warranty: '12 months',
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 11,
+    maxQuantity: 11,
     price: '5345'
   }, {
     id: '3',
@@ -33,7 +33,7 @@ export const products = [
     warranty: '14 days',
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 31,
+    maxQuantity: 31,
     price: '2324'
   }, {
     id: '4',
@@ -45,7 +45,7 @@ export const products = [
     warranty: '12 months',
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 2,
+    maxQuantity: 2,
     price: '1214'
   }, {
     id: '5',
@@ -57,7 +57,7 @@ export const products = [
     warranty: null,
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 0,
+    maxQuantity: 0,
     price: '5764'
   }, {
     id: '6',
@@ -69,7 +69,7 @@ export const products = [
     warranty: null,
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 66,
+    maxQuantity: 66,
     price: '9923'
   }, {
     id: '7',
@@ -81,7 +81,7 @@ export const products = [
     warranty: null,
     countryOfOrigin: 'China',
     brandCountry: 'China',
-    quantity: 66,
+    maxQuantity: 66,
     price: '3535'
   }
 ]

@@ -2,16 +2,69 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import some from 'lodash/some';
-import Grid from '@material-ui/core/Grid';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 import { 
   changeQuantityRequest,
   removeFromCartRequest
 } from '../../actions/products'
 import { Button } from '@material-ui/core';
+import CartItem from '../../components/CartItem';
 
-const CartItems = styled.div`
-  width: 66%;
+const CartPageEl = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const MyGridList = styled(GridList)`
+  width: 500px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px !important;
+`
+
+const MyListTile = styled(GridListTile)`
+  .MuiGridListTile-tile {
+    padding: 12px;
+  }
+`
+
+const ClearButton = styled(Button)`
+  &.MuiButton-root {
+    padding: 8px 24px;
+    background-color: gray;
+    color: white;
+    text-align: center;
+    margin-bottom: 24px;
   
+    &:hover {
+      background-color: gray;
+      opacity: 0.6;
+    }
+  }
+`
+
+const ProceedButton = styled(Button)`
+  &.MuiButton-root {
+    padding: 8px 24px;
+    background-color: green;
+    color: white;
+    text-align: center;
+    margin-bottom: 24px;
+  
+    &:hover {
+      background-color: green;
+      opacity: 0.6;
+    }
+  }
+`
+
+const EmptyState = styled.div`
+  margin-top: 52px;
+  font-size: 28px;
+  color: gray;
 `
 
 const CartPage = (props) => {
@@ -20,44 +73,45 @@ const CartPage = (props) => {
 
   const cartItems = props.products.filter(prod => some(props.cart, inCart => inCart.id === prod.id))
   const cartItemEls = cartItems.map(cartItem => (
-    <div className='cart-item'>
-      <Button onClick={() => onRemoveOne(cartItem.id)}>X</Button>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <img src='https://picsum.photos/700/500' />
-        </Grid>
-        <Grid item xs={12}>
-          <span className='item-title'>{cartItem.title}</span>
-        </Grid>
-        <Grid item xs={4}>
-          <span className='item-price'>{cartItem.price}</span>
-        </Grid>
-        <Grid item xs={4}>
-          {cartItem.quantity}
-        </Grid>
-        <Grid item xs={4}>
-          <span className='item-total'>{cartItem.price * cartItem.quantity}</span>
-        </Grid>
-      </Grid>
-    </div>
+    <MyListTile>
+      <CartItem product={cartItem} changeQuantity={props.changeQuantityRequest}/>
+    </MyListTile>
   ))
+
+  const buttonsBlock = (
+    <React.Fragment>
+      <div className='clear-all'>
+        <ClearButton onClick={onRemoveAll}>Clear Cart</ClearButton>
+      </div>
+      <div className='total-price'>
+        {/* {totalPrice}$ */}
+        <ProceedButton>Proceed</ProceedButton>
+      </div>
+    </React.Fragment>
+  )
+
+  const emptyState = (
+    <EmptyState>
+      No items in cart
+    </EmptyState>
+  )
 
   // const totalPrice = cartItems.length && cartItems.reduce((total, item) => total + item.price*item.quantity)
 
   return (
-    <div className='cart-page'>
-      <CartItems>
+    <CartPageEl>
+      <MyGridList cellHeight={'auto'} cols={1}>
         { cartItemEls }
-      </CartItems>
+      </MyGridList>
       
-      <div className='clear-all'>
-        <Button onClick={onRemoveAll}>Clear Cart</Button>
-      </div>
-      <div className='total-price'>
-        {/* {totalPrice}$ */}
-        <Button>Proceed</Button>
-      </div>
-    </div>
+      {
+        props.cart.length ?
+          buttonsBlock :
+          emptyState
+      }
+      
+      
+    </CartPageEl>      
   )
 }
 
