@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import some from 'lodash/some';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import { Button } from '@material-ui/core';
 import { 
   changeQuantityRequest,
   removeFromCartRequest
 } from '../../actions/products'
-import { Button } from '@material-ui/core';
 import CartItem from '../../components/CartItem';
 
 const CartPageEl = styled.div`
@@ -113,7 +113,6 @@ const CartPage = (props) => {
     </EmptyState>
   )
 
-
   return (
     <CartPageEl>
       <MyGridList cellHeight={'auto'} cols={1}>
@@ -125,7 +124,6 @@ const CartPage = (props) => {
           buttonsBlock :
           emptyState
       }
-      
       
     </CartPageEl>      
   )

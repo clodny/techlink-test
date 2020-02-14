@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-
 import { 
   getProductByIdRequest,
   addToCartRequest
@@ -53,7 +52,6 @@ const InTheCart = styled.div`
 `
 
 const BuyButton = styled(Button)`
-
   &.MuiButton-root {
     padding: 8px 24px;
     background-color: green;
@@ -65,7 +63,6 @@ const BuyButton = styled(Button)`
       opacity: 0.6;
     }
   }
-  
 `
 
 const ProductItemPage = (props) => {
@@ -120,7 +117,6 @@ const ProductItemPage = (props) => {
     </Grid>
   )
 }
-
 
 const mapDispatchToProps = {
   getProductByIdRequest,
