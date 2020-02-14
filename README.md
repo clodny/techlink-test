@@ -12,4 +12,4 @@ yarn
 yarn start
 ```
 
-Follow the link displayed in the terminal
+Follow the link displayed in the terminal to use the app
